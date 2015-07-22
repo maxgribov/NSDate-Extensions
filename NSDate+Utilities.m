@@ -430,8 +430,16 @@ static const unsigned componentFlags = (NSYearCalendarUnit| NSMonthCalendarUnit 
 // I have not yet thoroughly tested this
 - (NSInteger)distanceInDaysToDate:(NSDate *)anotherDate
 {
-    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [gregorianCalendar components:NSDayCalendarUnit fromDate:self toDate:anotherDate options:0];
+    if ([anotherDate isEqualToDate:[anotherDate dateAtEndOfDay]]) {
+        
+        NSDateComponents *oneSecondComponent = [[NSDateComponents alloc]init];
+        oneSecondComponent.second = 1;
+        
+        anotherDate = [[NSDate currentCalendar] dateByAddingComponents:oneSecondComponent toDate:anotherDate options:0];
+    }
+
+    NSDateComponents *components = [[NSDate currentCalendar] components:NSCalendarUnitDay fromDate:self toDate:anotherDate options:0];
+    
     return components.day;
 }
 
@@ -441,7 +449,7 @@ static const unsigned componentFlags = (NSYearCalendarUnit| NSMonthCalendarUnit 
 {
 	NSTimeInterval aTimeInterval = [[NSDate date] timeIntervalSinceReferenceDate] + D_MINUTE * 30;
 	NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
-	NSDateComponents *components = [[NSDate currentCalendar] components:NSHourCalendarUnit fromDate:newDate];
+	NSDateComponents *components = [[NSDate currentCalendar] components:NSCalendarUnitHour fromDate:newDate];
 	return components.hour;
 }
 
