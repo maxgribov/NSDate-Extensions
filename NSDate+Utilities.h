@@ -37,6 +37,7 @@
 @property (nonatomic, readonly) NSString *longString;
 @property (nonatomic, readonly) NSString *longDateString;
 @property (nonatomic, readonly) NSString *longTimeString;
+@property (nonatomic, readonly) NSString *monthName;
 
 // Comparing dates
 - (BOOL) isEqualToDateIgnoringTime: (NSDate *) aDate;
@@ -85,6 +86,7 @@
 // Date extremes
 - (NSDate *) dateAtStartOfDay;
 - (NSDate *) dateAtEndOfDay;
+- (NSDate *) dateAtBeginOfMonth;
 
 // Retrieving intervals
 - (NSInteger) minutesAfterDate: (NSDate *) aDate;
