@@ -442,6 +442,12 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
 	return (NSInteger) (ti / D_DAY);
 }
 
+- (NSInteger)daysInMonth {
+    
+    return [[NSDate currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:self].length;
+}
+
+
 // Thanks, dmitrydims
 // I have not yet thoroughly tested this
 - (NSInteger)distanceInDaysToDate:(NSDate *)anotherDate
