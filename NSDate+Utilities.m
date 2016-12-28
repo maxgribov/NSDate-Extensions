@@ -375,6 +375,31 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
 	return dTime;
 }
 
+#pragma mark - Composing dates
+
+- (NSDate *)replaceDatePart:(NSDate *)date {
+
+    NSDateComponents *components = [[NSDate currentCalendar] components:componentFlags fromDate:self];
+    NSDateComponents *replaceComponents = [[NSDate currentCalendar] components:NSCalendarUnitYear| NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
+    
+    components.year = replaceComponents.year;
+    components.month = replaceComponents.month;
+    components.day = replaceComponents.day;
+    
+    return [[NSDate currentCalendar] dateFromComponents:components];
+}
+- (NSDate *)replaceTimePart:(NSDate *)date {
+
+    NSDateComponents *components = [[NSDate currentCalendar] components:componentFlags fromDate:self];
+    NSDateComponents *replaceComponents = [[NSDate currentCalendar] components: NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:date];
+    
+    components.hour = replaceComponents.hour;
+    components.minute = replaceComponents.minute;
+    components.second = replaceComponents.second;
+    
+    return [[NSDate currentCalendar] dateFromComponents:components];
+}
+
 #pragma mark - Extremes
 
 - (NSDate *) dateAtStartOfDay
