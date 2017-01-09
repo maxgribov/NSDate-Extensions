@@ -369,6 +369,18 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
 	return [self dateByAddingMinutes: (dMinutes * -1)];
 }
 
+- (NSDate *) dateByAddingSeconds: (NSInteger) dSeconds {
+
+    NSTimeInterval aTimeInterval = [self timeIntervalSinceReferenceDate] + dSeconds;
+    NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
+    return newDate;
+}
+
+- (NSDate *) dateBySubtractingSeconds: (NSInteger) dSeconds {
+    
+    return [self dateByAddingSeconds:(dSeconds * -1)];
+}
+
 - (NSDateComponents *) componentsWithOffsetFromDate: (NSDate *) aDate
 {
 	NSDateComponents *dTime = [[NSDate currentCalendar] components:componentFlags fromDate:aDate toDate:self options:0];
