@@ -91,6 +91,7 @@
 
 // Date extremes
 - (NSDate *) dateAtStartOfDay;
+- (NSDate *) dateAtStartOfDayIgnoreSeconds;
 - (NSDate *) dateAtEndOfDay;
 - (NSDate *) dateAtBeginOfMonth;
 

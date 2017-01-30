@@ -423,6 +423,14 @@ static const unsigned componentFlags = (NSCalendarUnitYear| NSCalendarUnitMonth 
 	return [[NSDate currentCalendar] dateFromComponents:components];
 }
 
+- (NSDate *) dateAtStartOfDayIgnoreSeconds {
+    
+    NSDateComponents *components = [[NSDate currentCalendar] components:componentFlags fromDate:self];
+    components.hour = 0;
+    components.minute = 0;
+    return [[NSDate currentCalendar] dateFromComponents:components];
+}
+
 // Thanks gsempe & mteece
 - (NSDate *) dateAtEndOfDay
 {
